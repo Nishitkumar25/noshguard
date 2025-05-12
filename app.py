@@ -6,9 +6,8 @@ import os
 from mistralai import Mistral
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all origins
+CORS(app)
 
-# API key for Mistral
 api_key = os.getenv("MISTRAL_API_KEY", "aCHLMXr7v1Ojf2lniUNkjftHGnzxLoDp")
 client = None
 
@@ -74,16 +73,14 @@ def analyze():
             return jsonify({"error": "user_diseases must be a list"}), 400
 
         diseases_string = ", ".join(user_diseases) or "no known conditions"
-        prompt = f"""
-You are NoshGuard, a food ingredient analyzer.
+        prompt = f"""You are NoshGuard, a food ingredient analyzer.
 User diseases: {diseases_string}
 Scanned ingredients:
 ---
 {ocr_text}
 ---
 Analyze possible health risks and give a short summary.
-Conclude with: 'This is not medical advice.'
-""".strip()
+Conclude with: 'This is not medical advice.'"""
 
         messages = [{"role": "user", "content": prompt}]
 
