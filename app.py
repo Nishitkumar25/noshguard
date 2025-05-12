@@ -1,11 +1,10 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import base64
 import os
 from mistralai import Mistral
 
-app = Flask(__name__)
+app = Flask(_name_)
 CORS(app)
 
 api_key = os.getenv("MISTRAL_API_KEY", "aCHLMXr7v1Ojf2lniUNkjftHGnzxLoDp")
@@ -97,6 +96,6 @@ Conclude with: 'This is not medical advice.'"""
         app.logger.error(f"Analyze Error: {e}")
         return jsonify({"error": f"Analyze failed: {str(e)}"}), 500
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port)
